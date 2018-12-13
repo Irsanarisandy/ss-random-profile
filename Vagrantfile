@@ -4,7 +4,7 @@
 Vagrant.configure(2) do |config|
 
     config.vm.hostname = "ssrandomprofile.local"
-    config.vm.network "private_network", ip: "192.168.33.4" # Change IP for multiple boxes
+    config.vm.network "private_network", ip: "192.168.33.5" # Change IP for multiple boxes
 
     config.vm.box = "silverstripeltd/dev-ssp"
 

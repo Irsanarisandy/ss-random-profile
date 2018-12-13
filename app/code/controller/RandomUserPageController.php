@@ -2,8 +2,10 @@
 
 namespace App\Controller;
 
-use PageController;
 use Page;
+use PageController;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ConnectException;
 
 class RandomUserPageController extends PageController
 {
@@ -11,8 +13,37 @@ class RandomUserPageController extends PageController
 
     public function fetchRandom()
     {
-        $json = file_get_contents('https://randomuser.me/api/?nat=nz&inc=name,email,cell,picture', false);
-        $obj = json_decode($json, true)['results'][0];
+        $client = new Client(['base_uri' => 'https://randomuser.me']);
+        $params = [
+            'query' => [
+                'nat' => 'nz',
+                'inc' => implode(
+                    ',',
+                    [
+                        'name',
+                        'email',
+                        'cell',
+                        'picture'
+                    ]
+                )
+            ],
+            'timeout' => 3
+        ];
+
+        try {
+            $res = $client->request('GET', '/api', $params);
+        } catch (ConnectException $err) {
+            return $this->httpError(500, $err->getMessage());
+        }
+
+        $status = $res->getStatusCode();
+
+        if ($status !== 200) {
+            return $this->httpError($status, "Can't generate random user profile!");
+        }
+
+        $obj = json_decode($res->getBody(), true)['results'][0];
+
         return $this->customise(
             [
                 'FirstName' => ucfirst($obj['name']['first']),
