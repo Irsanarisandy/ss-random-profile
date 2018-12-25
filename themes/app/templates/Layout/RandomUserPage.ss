@@ -1,12 +1,10 @@
-<div class="container">
-    <div class="row">
-        <div class="col-6">
-            <img src="$LargePhoto" alt="Profile Photo" />
-        </div>
-        <div class="col-6">
+<div class="row my-3">
+    <div class="d-flex align-items-center random-user">
+        <img src="$LargePhoto" alt="Profile Photo" />
+        <div class="random-user__details">
             <p>$FirstName $LastName</p>
-            <p>$Email</p>
             <p>$CellNo</p>
+            <p>$Email</p>
         </div>
     </div>
 </div>

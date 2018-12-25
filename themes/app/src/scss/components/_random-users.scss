@@ -1,0 +1,32 @@
+.random-users__data {
+    font-size: 12px;
+}
+
+@include media-breakpoint-down(xs) {
+    .random-user {
+        flex-direction: column;
+        text-align: center;
+        width: 100%;
+    }
+
+    .random-user__details {
+        margin-top: 10px;
+    }
+}
+
+@include media-breakpoint-up(sm) {
+    .random-user__details {
+        margin-left: 20px;
+    }
+
+    .random-users__data {
+        font-size: initial;
+        padding: 0 0.5rem;
+    }
+}
+
+@include media-breakpoint-up(md) {
+    .random-users__data {
+        padding: 0 1rem;
+    }
+}

@@ -21,16 +21,16 @@
 // @import '~bootstrap/scss/tables';
 // @import '~bootstrap/scss/forms';
 @import '~bootstrap/scss/buttons';
-// @import '~bootstrap/scss/transitions';
-// @import '~bootstrap/scss/dropdown';
+@import '~bootstrap/scss/transitions';
+@import '~bootstrap/scss/dropdown';
 // @import '~bootstrap/scss/button-group';
 // @import '~bootstrap/scss/input-group';
 // @import '~bootstrap/scss/custom-forms';
 @import '~bootstrap/scss/nav';
 @import '~bootstrap/scss/navbar';
 // @import '~bootstrap/scss/card';
-// @import '~bootstrap/scss/breadcrumb'  ;
-// @import '~bootstrap/scss/pagination'  ;
+// @import '~bootstrap/scss/breadcrumb';
+// @import '~bootstrap/scss/pagination';
 // @import '~bootstrap/scss/badge';
 // @import '~bootstrap/scss/jumbotron';
 // @import '~bootstrap/scss/alert';
@@ -46,12 +46,7 @@
 @import '~bootstrap/scss/print';
 
 /**
- * Include Typography and other theme styles
+ * Include other theme styles
  */
 @import 'typography';
-@import 'base';
-@import 'components/navigation';
-
-/**
- * Include components, i.e. Vue or React
- */
+@import 'components/random-users';

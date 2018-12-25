@@ -1,1 +1,3 @@
-<footer>Irsan Arisandy @ SilverStripe &copy; $Now.Year</footer>
+<footer>
+    <p>Irsan Arisandy @ SilverStripe &copy; $Now.Year</p>
+</footer>

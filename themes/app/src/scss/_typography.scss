@@ -7,4 +7,33 @@
 
 body {
     font-family: Federant, serif;
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+
+    &:hover {
+        text-decoration: none;
+    }
+}
+
+p {
+    margin: 0;
+}
+
+.custom-row {
+    @extend .row;
+}
+
+footer {
+    padding-left: 16px;
+}
+
+@include media-breakpoint-between(sm, md) {
+    footer {
+        @extend .custom-row;
+
+        padding-left: 0;
+    }
 }

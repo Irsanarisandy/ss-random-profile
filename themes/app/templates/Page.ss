@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <!-- <%-- $MetaTags have to set to false to set custom title --%> -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -11,13 +11,15 @@
         <% require themedCSS("dist/app.min") %>
     <% end_if %>
 </head>
-<body>
+<body id="$ClassName">
     <div id="app">
-        <% include Navigation %>
-        <main>
-            $Layout
-        </main>
-        <% include Footer %>
+        <% include Header %>
+        <div class="container">
+            <main>
+                $Layout
+            </main>
+            <% include Footer %>
+        </div>
         <% if $IsDev %>
             <% require themedJavascript("dist/app") %>
         <% else %>

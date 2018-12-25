@@ -7,3 +7,4 @@ After:
 SilverStripe\Control\Director:
   rules:
     'user//$Action': 'App\Controller\RandomUserPageController'
+    'users//$Action': 'App\Controller\RandomUsersPageController'
