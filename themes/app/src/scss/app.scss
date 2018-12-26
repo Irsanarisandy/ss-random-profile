@@ -19,7 +19,7 @@
 // @import '~bootstrap/scss/code';
 @import '~bootstrap/scss/grid';
 // @import '~bootstrap/scss/tables';
-// @import '~bootstrap/scss/forms';
+@import '~bootstrap/scss/forms';
 @import '~bootstrap/scss/buttons';
 @import '~bootstrap/scss/transitions';
 @import '~bootstrap/scss/dropdown';
@@ -49,4 +49,6 @@
  * Include other theme styles
  */
 @import 'typography';
+@import 'components/page';
+@import 'components/admin-page';
 @import 'components/random-users';

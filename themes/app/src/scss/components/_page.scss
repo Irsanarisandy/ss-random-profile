@@ -1,0 +1,21 @@
+.current-page {
+    .message {
+        margin-bottom: 14px;
+    }
+}
+
+.current-page__title {
+    margin-bottom: 16px;
+}
+
+@include media-breakpoint-between(sm, md) {
+    .current-page {
+        @for $i from 1 through 12 {
+            .col-#{$i},
+            .col-md-#{$i} {
+                padding-left: 0;
+                padding-right: 0;
+            }
+        }
+    }
+}

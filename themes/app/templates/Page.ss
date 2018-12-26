@@ -15,7 +15,7 @@
     <div id="app">
         <% include Header %>
         <div class="container">
-            <main>
+            <main class="my-4">
                 $Layout
             </main>
             <% include Footer %>

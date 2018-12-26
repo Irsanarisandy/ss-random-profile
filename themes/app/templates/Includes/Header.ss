@@ -1,5 +1,5 @@
 <main-nav>
-    <a slot="baselink" class="navbar-brand" href="$baseURL">Navbar</a>
+    <a slot="baselink" class="navbar-brand" href="$baseURL">$SiteConfig.Title</a>
     <ul slot="collapsible" class="navbar-nav">
         <% loop $Menu(1) %>
             <% if $Link != $baseURL %>

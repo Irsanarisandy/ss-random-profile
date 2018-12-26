@@ -1,3 +1,4 @@
+<a class="btn btn-warning" role="button" href="$baseURL\user/fetchrandom">Generate New User</a>
 <table class="random-users mx-auto my-3">
     <thead>
         <tr>
@@ -21,4 +22,3 @@
         <% end_loop %>
     </tbody>
 </table>
-<a class="btn btn-warning mb-3" role="button" href="$baseURL\user/fetchrandom">Generate New User</a>

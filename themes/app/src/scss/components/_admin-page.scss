@@ -1,0 +1,21 @@
+#MemberLoginForm_LoginForm {
+    div {
+        &.field {
+            margin-bottom: 14px;
+        }
+    }
+
+    input {
+        &.text,
+        &.action {
+            @extend .form-control;
+        }
+
+        &.action {
+            @extend .btn, .btn-outline-dark;
+
+            margin-bottom: 16px;
+            width: initial;
+        }
+    }
+}
