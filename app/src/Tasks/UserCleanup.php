@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Task;
+namespace App\Tasks;
 
-use App\Model\RandomUser;
 use SilverStripe\Dev\BuildTask;
+use SilverStripe\Security\Member;
 
 class UserCleanup extends BuildTask
 {
@@ -15,8 +15,8 @@ class UserCleanup extends BuildTask
 
     public function run($request)
     {
-        $query = RandomUser::get()->where(
-            "FirstName LIKE 'M%' OR LastName LIKE 'M%'"
+        $query = Member::get()->where(
+            "FirstName LIKE 'M%' OR Surname LIKE 'M%'"
         );
 
         if ($query->count() > 0) {
@@ -24,7 +24,7 @@ class UserCleanup extends BuildTask
             echo '<p>These names are:</p>';
 
             foreach ($query as $row) {
-                echo '<p>'.$row->FirstName.' '.$row->LastName.'</p>';
+                echo '<p>'.$row->FirstName.' '.$row->Surname.'</p>';
                 $row->delete();
             }
 

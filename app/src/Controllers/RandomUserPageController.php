@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controllers;
 
 use Page;
 use PageController;
 use GuzzleHttp\Client;
-use SilverStripe\ORM\Queries\SQLInsert;
+use SilverStripe\Core\Convert;
+use SilverStripe\Security\Member;
 use GuzzleHttp\Exception\ConnectException;
-use App\Model\RandomUser;
 
 class RandomUserPageController extends PageController
 {
@@ -16,7 +16,7 @@ class RandomUserPageController extends PageController
     private function isValidData(array $data)
     {
         $firstName = $data['name']['first'];
-        $lastName = $data['name']['first'];
+        $surname = $data['name']['last'];
         $email = $data['email'];
         $cell = $data['cell'];
         $largePhoto = $data['picture']['large'];
@@ -27,7 +27,7 @@ class RandomUserPageController extends PageController
             return $this->httpError(403, "First name must be alphabetic!");
         }
 
-        if (!isset($lastName) || !is_string($lastName) || !ctype_alpha($lastName)) {
+        if (!isset($surname) || !is_string($surname) || !ctype_alpha($surname)) {
             return $this->httpError(403, "Last name must be alphabetic!");
         }
 
@@ -56,18 +56,17 @@ class RandomUserPageController extends PageController
 
     private function isDuplicate(array $data)
     {
-        $select = RandomUser::get()->where(
-            "FirstName = '".ucfirst($data['name']['first']).
-            "' OR LastName = '".ucfirst($data['name']['last']).
-            "' OR Email = '".$data['email'].
-            "' OR CellNo = '".$data['cell'].
-            "' OR LargePhoto = '".$data['picture']['large'].
-            "' OR MediumPhoto = '".$data['picture']['medium'].
-            "' OR SmallPhoto = '".$data['picture']['thumbnail']."'"
+        $select = Member::get()->filterAny(
+            [
+                'FirstName' => ucfirst($data['name']['first']),
+                'Surname' => ucfirst($data['name']['last']),
+                'Email' => $data['email'],
+                'CellNo' => $data['cell'],
+                'LargePhoto' => $data['picture']['large'],
+                'MediumPhoto' => $data['picture']['medium'],
+                'SmallPhoto' => $data['picture']['thumbnail'],
+            ]
         );
-
-        // $rawSQL = $select->sql();
-        // var_dump($rawSQL);
 
         return $select->count() > 0;
     }
@@ -88,7 +87,8 @@ class RandomUserPageController extends PageController
                     ]
                 )
             ],
-            'timeout' => 3
+            'timeout' => 3,
+            'connect_timeout' => 3
         ];
 
         $duplicateData = true;
@@ -114,29 +114,22 @@ class RandomUserPageController extends PageController
             $duplicateData = $this->isDuplicate($obj);
         }
 
-        $insert = SQLInsert::create('RandomUser');
+        $member = Member::create();
 
-        $insert->addRow(
-            [
-                'FirstName' => ucfirst($obj['name']['first']),
-                'LastName' => ucfirst($obj['name']['last']),
-                'Email' => $obj['email'],
-                'CellNo' => $obj['cell'],
-                'LargePhoto' => $obj['picture']['large'],
-                'MediumPhoto' => $obj['picture']['medium'],
-                'SmallPhoto' => $obj['picture']['thumbnail'],
-            ]
-        );
+        $member->FirstName = Convert::raw2sql(ucfirst($obj['name']['first']));
+        $member->Surname = Convert::raw2sql(ucfirst($obj['name']['last']));
+        $member->Email = Convert::raw2sql($obj['email']);
+        $member->CellNo = Convert::raw2sql($obj['cell']);
+        $member->LargePhoto = Convert::raw2sql($obj['picture']['large']);
+        $member->MediumPhoto = Convert::raw2sql($obj['picture']['medium']);
+        $member->SmallPhoto = Convert::raw2sql($obj['picture']['thumbnail']);
 
-        // $rawSQL = $insert->sql();
-        // var_dump($rawSQL);
-
-        $insert->execute();
+        $member->write();
 
         return $this->customise(
             [
                 'FirstName' => ucfirst($obj['name']['first']),
-                'LastName' => ucfirst($obj['name']['last']),
+                'Surname' => ucfirst($obj['name']['last']),
                 'Email' => $obj['email'],
                 'CellNo' => $obj['cell'],
                 'LargePhoto' => $obj['picture']['large'],

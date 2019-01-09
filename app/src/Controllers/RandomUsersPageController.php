@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controllers;
 
 use Page;
 use PageController;
-use App\Model\RandomUser;
+use SilverStripe\Security\Member;
 
 class RandomUsersPageController extends PageController
 {
@@ -12,7 +12,11 @@ class RandomUsersPageController extends PageController
 
     public function fetchAll()
     {
-        $randomUsers = RandomUser::get();
+        $randomUsers = Member::get()->filter(
+            [
+                'Email:not' => 'root'
+            ]
+        );
 
         return $this->customise(
             [
